@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Http\Requests\PhoneRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Phone;
+use Auth;
+use App\Http\Resources\PhoneResource;
+use App\Http\Resources\PhoneCollection;
 class PhoneController extends Controller
 {
     /**
@@ -14,7 +17,10 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        //
+        // return Phone::select('id','phone_number')->get();
+        // return PhoneResource::collection(Phone::select('id','phone_number')->get());
+        // return PhoneResource::collection(Phone::all());
+        return new PhoneCollection(Phone::all());
     }
 
     /**
@@ -23,9 +29,14 @@ class PhoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhoneRequest $request)
     {
-        //
+        
+        $phone=Auth::User()->phones()->create($request->all());
+        return new PhoneResource($phone);
+      
+       
+
     }
 
     /**
@@ -36,7 +47,10 @@ class PhoneController extends Controller
      */
     public function show($id)
     {
-        //
+        // $phone=Phone::where('id',$id)->select('phone_number')->first();
+        // return $phone;
+        return new PhoneResource(Phone::find($id));
+        
     }
 
     /**
@@ -47,8 +61,11 @@ class PhoneController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { 
+        
+        $usersphone=Phone::find($id);
+        $usersphone ->update($request->all());
+        return new PhoneResource($usersphone); 
     }
 
     /**

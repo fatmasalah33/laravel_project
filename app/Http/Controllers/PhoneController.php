@@ -5,6 +5,8 @@ use App\Http\Requests\PhoneRequest;
 use Illuminate\Http\Request;
 use App\Models\Phone;
 use Auth;
+use App\Http\Resources\PhoneResource;
+use App\Http\Resources\PhoneCollection;
 class PhoneController extends Controller
 {
     /**

@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class PhoneResource extends JsonResource
+class PhoneCollection extends ResourceCollection
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -15,9 +15,8 @@ class PhoneResource extends JsonResource
     public function toArray($request)
     {
         return [
-        
-            'phone_number' => $this->phone_number,
-            'user' => new UserResource($this->user),
+            'phones' => $this->collection,
+            'meta_data' => 'more data ...'
         ];
     }
 }
