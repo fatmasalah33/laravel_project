@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th scope="col">phone</th>
-      <th scope="col">author</th>
+      <th scope="col">user name</th>
       <th scope="col"></th>
    
     </tr>
