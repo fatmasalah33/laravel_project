@@ -31,9 +31,15 @@ class PhoneController extends Controller
      */
     public function store(PhoneRequest $request)
     {
-        
-        $phone=Auth::User()->phones()->create($request->all());
-        return new PhoneResource($phone);
+        $usersphone=new Phone();
+        $usersphone->phone_number=$request->phone_number;
+        $usersphone->user_id=$request->user_id;
+        if($usersphone->save()){
+            return new PhoneResource($usersphone);
+           }
+        //  $phone=Auth::User()->phones()->create($request->all());
+        // $phone=Auth::User()->phones()->create($request->all());
+        // return new PhoneResource($phone);
       
        
 
@@ -76,6 +82,7 @@ class PhoneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Phone::find($id)->delete();
+        return new PhoneCollection(Phone::all());
     }
 }

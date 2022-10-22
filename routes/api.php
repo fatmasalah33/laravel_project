@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('phones','App\Http\Controllers\API\PhoneController')->middleware('auth:sanctum');
+// Route::apiResource('phones','App\Http\Controllers\API\PhoneController');
+ Route::apiResource('phones','App\Http\Controllers\API\PhoneController')->middleware('auth:sanctum');
 Route::Post('login', ['App\Http\Controllers\API\Auth\LoginController','login']);
